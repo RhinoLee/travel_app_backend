@@ -11,6 +11,7 @@ const db = require("./db.js");
 const port = 5001;
 
 // controller
+const timeZoneController = require("./controller/timezone")
 const travelController = require("./controller/travel")
 
 const corsOptions = {
@@ -20,6 +21,10 @@ app.use(cors(corsOptions))
 app.use(jsonParser);
 app.use(urlencodedParser);
 
+// 時區表
+app.get("/timezone", timeZoneController.getTimeZoneList)
+
+// travel CRUD
 app.get("/travel", travelController.getAllTravel)
 app.post("/travel", travelController.createTravel)
 
