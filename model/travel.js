@@ -14,20 +14,39 @@ const travelModel = {
     }
   },
   createTravel: async ({ name, intro, description, start_date, end_date }) => {
-    console.log("create travel request model", { name, intro, description, start_date, end_date });
+    console.log("create travel request model", {
+      name,
+      intro,
+      description,
+      start_date,
+      end_date,
+    });
     const query = {
       text: `INSERT INTO 
             travel(name, intro, description, start_date, end_date) 
             VALUES($1, $2, $3, $4, $5) RETURNING *`,
-      values: [name, intro, description, start_date, end_date]
-    }
+      values: [name, intro, description, start_date, end_date],
+    };
 
     try {
-      const result = await db.query(query)
+      const result = await db.query(query);
       console.log("createTravel result", result);
-      return result
-    } catch(err) {
-      return err
+      return result;
+    } catch (err) {
+      return err;
+    }
+  },
+  deleteTravel: async (travelId) => {
+    const query = {
+      text: "DELETE FROM travel WHERE id = $1 RETURNING id",
+      values: [travelId],
+    };
+
+    try {
+      const result = await db.query(query);
+      return result.rowCount;
+    } catch (err) {
+      return err;
     }
   },
 };

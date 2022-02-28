@@ -61,6 +61,24 @@ const travelController = {
       res.status(400).json(json)
     }
   },
+  deleteTravel: async (req, res) => {
+    const { travelId } = req.body
+    let json;
+    if (!travelId && travelId !== 0) return
+
+    const result = await travelModel.deleteTravel(travelId)
+    if (result) {
+      json = {
+        success: true,
+      };
+      res.status(200).json(json);
+    } else {
+      json = {
+        success: false,
+      };
+      res.status(400).json(json);
+    }
+  }
 };
 
 module.exports = travelController;
