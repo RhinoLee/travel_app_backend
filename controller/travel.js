@@ -19,7 +19,7 @@ const travelController = {
     }
   },
   createTravel: async (req, res) => {
-    const { name, intro, description, start_date, end_date } = req.body;
+    const { name, intro, description, start_date, end_date, timezone } = req.body;
     let json;
     if (!name) {
       json = {
@@ -44,6 +44,7 @@ const travelController = {
       description,
       start_date,
       end_date,
+      timezone
     });
 
     if (result && Array.isArray(result.rows)) {

@@ -13,19 +13,12 @@ const travelModel = {
       return err;
     }
   },
-  createTravel: async ({ name, intro, description, start_date, end_date }) => {
-    console.log("create travel request model", {
-      name,
-      intro,
-      description,
-      start_date,
-      end_date,
-    });
+  createTravel: async ({ name, intro, description, start_date, end_date, timezone }) => {
     const query = {
       text: `INSERT INTO 
-            travel(name, intro, description, start_date, end_date) 
-            VALUES($1, $2, $3, $4, $5) RETURNING *`,
-      values: [name, intro, description, start_date, end_date],
+            travel(name, intro, description, start_date, end_date, timezone) 
+            VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
+      values: [name, intro, description, start_date, end_date, timezone],
     };
 
     try {
