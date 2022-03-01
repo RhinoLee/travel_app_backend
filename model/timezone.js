@@ -8,7 +8,6 @@ const timeZoneModel = {
 
     try {
       const result = await db.query(query)
-      console.log("timezone model result", result);
       return result
     } catch(err) {
       return err 

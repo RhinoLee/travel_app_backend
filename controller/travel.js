@@ -29,7 +29,7 @@ const travelController = {
       };
       return res.status(403).json(json);
     }
-    if (start_date !== null || end_date !== null) {
+    if (!start_date || !end_date) {
       json = {
         success: false,
         data: null,
