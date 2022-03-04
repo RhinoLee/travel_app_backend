@@ -26,6 +26,7 @@ app.get("/timezone", timeZoneController.getTimeZoneList)
 
 // travel CRUD
 app.get("/travel", travelController.getAllTravel)
+app.get("/travel/:travelId", travelController.getTravel)
 app.post("/travel", travelController.createTravel)
 app.delete("/travel", travelController.deleteTravel)
 

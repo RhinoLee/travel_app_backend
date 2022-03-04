@@ -13,6 +13,19 @@ const travelModel = {
       return err;
     }
   },
+  getTravel: async (travelId) => {
+    const query = {
+      text: "SELECT * FROM travel WHERE id = $1",
+      values: [travelId]
+    }
+
+    try {
+      const result = await db.query(query)
+      return result
+    } catch(err) {
+      return err
+    }
+  },
   createTravel: async ({ name, intro, description, start_date, end_date, timezone }) => {
     const query = {
       text: `INSERT INTO 

@@ -18,6 +18,36 @@ const travelController = {
       res.status(404).json(json);
     }
   },
+  getTravel: async (req, res) => {
+    const travelId = req.params.travelId
+    let json;
+    if (!travelId && travelId !== 0) {
+      json = {
+        success: false,
+        travel: null,
+        error: "未帶 travelId",
+      }
+
+      return res.status(403).json(json);
+    }
+    const result = await travelModel.getTravel(travelId)
+    if (result && result.rows[0]) {
+      const json = {
+        success: true,
+        travel: result.rows[0]
+      }
+
+      res.status(200).json(json)
+    } else {
+      json = {
+        success: false,
+        travel: null,
+        error: "發生錯誤",
+      }
+
+      res.status(400).json(json)
+    }
+  },
   createTravel: async (req, res) => {
     const { name, intro, description, start_date, end_date, timezone } = req.body;
     let json;
