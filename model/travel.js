@@ -36,7 +36,6 @@ const travelModel = {
 
     try {
       const result = await db.query(query);
-      console.log("createTravel result", result);
       return result;
     } catch (err) {
       return err;
