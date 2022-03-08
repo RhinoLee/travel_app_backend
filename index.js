@@ -13,6 +13,7 @@ const port = 5001;
 // controller
 const timeZoneController = require("./controller/timezone")
 const travelController = require("./controller/travel")
+const locationController = require("./controller/location")
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -29,6 +30,9 @@ app.get("/travel", travelController.getAllTravel)
 app.get("/travel/:travelId", travelController.getTravel)
 app.post("/travel", travelController.createTravel)
 app.delete("/travel", travelController.deleteTravel)
+
+// location CRUD
+app.post("/location", locationController.createLocation)
 
 app.listen(port, () => {
   db.connect();
