@@ -32,7 +32,9 @@ app.post("/travel", travelController.createTravel)
 app.delete("/travel", travelController.deleteTravel)
 
 // location CRUD
+app.get("/location", locationController.getAllLocation)
 app.post("/location", locationController.createLocation)
+app.delete("/location", locationController.deleteLocation)
 
 app.listen(port, () => {
   db.connect();
