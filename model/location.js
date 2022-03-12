@@ -3,7 +3,8 @@ const db = require("../db")
 const locationModel = {
   getAllLocation: async () => {
     const query = {
-      text: `SELECT * FROM location`,
+      text: `SELECT * FROM location WHERE is_collect = $1`,
+      values: [1]
     }
 
     try {
