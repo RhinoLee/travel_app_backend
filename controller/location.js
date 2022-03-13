@@ -50,7 +50,7 @@ const locationController = {
 
   },
   createLocation: async (req, res) => {
-    const { name, address, category, lat, lng } = req.body
+    const { name, address, category, lat, lng, is_collect } = req.body
     let json;
     if (!name || !lat || !lng) {
       json = {
@@ -60,7 +60,7 @@ const locationController = {
       };
       return res.status(403).json(json)
     }
-    const result = await locationModel.createLocation({ name, address, category, lat, lng });
+    const result = await locationModel.createLocation({ name, address, category, lat, lng, is_collect });
     if (result && Array.isArray(result.rows)) {
       json = {
         success: true,

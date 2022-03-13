@@ -20,7 +20,7 @@ exports.up = pgm => {
     CONSTRAINT
       fk_daytrip
         FOREIGN KEY(daytrip_id)
-          REFERENCES daytrip(id)
+          REFERENCES daytrip_collect(id)
           ON DELETE CASCADE
   )
   `)
@@ -33,4 +33,8 @@ exports.up = pgm => {
   `);
 };
 
-exports.down = pgm => { };
+exports.down = pgm => { 
+  pgm.sql(`
+  DROP TABLE single_trip_collect
+  `)
+};
