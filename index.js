@@ -40,6 +40,7 @@ app.delete("/location", locationController.deleteLocation)
 
 // daytrip_collect CRUD
 app.get("/daytrip_collect", daytripCollectController.getAll)
+app.get("/daytrip_collect/:daytripId", daytripCollectController.getCollect)
 app.post("/daytrip_collect", daytripCollectController.createCollect)
 
 // single_trip_collect CRUD
