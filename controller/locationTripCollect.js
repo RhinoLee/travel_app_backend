@@ -1,6 +1,6 @@
-const singleTripCollectModel = require("../model/singleTripCollect");
+const singleTripCollectModel = require("../model/locationTripCollect");
 
-const singleTripCollectController = {
+const locationTripCollectController = {
   createCollect: async (req, res) => {
     const { dayTripId, tripList } = req.body
     let json;
@@ -69,4 +69,4 @@ const singleTripCollectController = {
   }
 };
 
-module.exports = singleTripCollectController;
+module.exports = locationTripCollectController;

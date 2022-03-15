@@ -1,9 +1,9 @@
 const db = require("../db")
 
-const daytripCollectModel = {
+const travelSampleModel = {
   getAll: async () => {
     const query = {
-      text: "SELECT id,name FROM daytrip_collect",
+      text: "SELECT id,name FROM travel_sample",
     }
 
     try {
@@ -13,9 +13,9 @@ const daytripCollectModel = {
       return err
     }
   },
-  createCollect: async (name) => {
+  createSample: async (name) => {
     const query = {
-      text: `INSERT INTO daytrip_collect(name) 
+      text: `INSERT INTO travel_sample(name) 
               VALUES($1) RETURNING *`,
       values: [name]
     }
@@ -27,21 +27,21 @@ const daytripCollectModel = {
       return err
     }
   },
-  getCollect: async (daytripId) => {
+  getSample: async (sampleId) => {
     const query = {
       text: `
       SELECT 
-      daytrip_collect.id, daytrip_collect.name,
+      travel_sample.id, travel_sample.name,
       start_time, end_time,
       location.name, address, category, lat, lng, is_collect
-      FROM daytrip_collect
-      LEFT JOIN single_trip_collect
-      ON daytrip_collect.id = single_trip_collect.daytrip_id
+      FROM travel_sample
+      LEFT JOIN location_trip_collect
+      ON travel_sample.id = location_trip_collect.travel_sample_id
       LEFT JOIN location
-      ON single_trip_collect.location_id = location.id
-      WHERE daytrip_collect.id = $1
+      ON location_trip_collect.location_id = location.id
+      WHERE travel_sample.id = $1
       `,
-      values: [daytripId]
+      values: [sampleId]
     }
 
     try {
@@ -53,4 +53,4 @@ const daytripCollectModel = {
   }
 }
 
-module.exports = daytripCollectModel
+module.exports = travelSampleModel

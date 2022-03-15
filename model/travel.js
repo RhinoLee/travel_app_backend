@@ -3,7 +3,7 @@ const db = require("../db");
 const travelModel = {
   getAllTravel: async () => {
     const query = {
-      text: "SELECT * FROM travel ORDER BY start_date",
+      text: "SELECT * FROM travel_plan ORDER BY start_date",
     };
 
     try {
@@ -15,7 +15,7 @@ const travelModel = {
   },
   getTravel: async (travelId) => {
     const query = {
-      text: "SELECT * FROM travel WHERE id = $1",
+      text: "SELECT * FROM travel_plan WHERE id = $1",
       values: [travelId]
     }
 
@@ -29,7 +29,7 @@ const travelModel = {
   createTravel: async ({ name, intro, description, start_date, end_date, timezone }) => {
     const query = {
       text: `INSERT INTO 
-            travel(name, intro, description, start_date, end_date, timezone) 
+            travel_plan(name, intro, description, start_date, end_date, timezone) 
             VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
       values: [name, intro, description, start_date, end_date, timezone],
     };
@@ -43,7 +43,7 @@ const travelModel = {
   },
   deleteTravel: async (travelId) => {
     const query = {
-      text: "DELETE FROM travel WHERE id = $1 RETURNING id",
+      text: "DELETE FROM travel_plan WHERE id = $1 RETURNING id",
       values: [travelId],
     };
 

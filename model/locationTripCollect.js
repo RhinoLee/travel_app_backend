@@ -1,9 +1,9 @@
 const db = require("../db")
 
-const singleTripCollectModel = {
+const locationTripCollect = {
   createCollect: async ({location_id, daytrip_id, start_time, end_time}) => {
     const query = {
-      text: `INSERT INTO single_trip_collect 
+      text: `INSERT INTO location_trip_collect 
               (location_id, daytrip_id, start_time, end_time)
               VALUES($1, $2, $3, $4) RETURNING *`,
       values: [location_id, daytrip_id, start_time, end_time]
@@ -18,4 +18,4 @@ const singleTripCollectModel = {
   }
 }
 
-module.exports = singleTripCollectModel
+module.exports = locationTripCollect

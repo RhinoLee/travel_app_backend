@@ -1,8 +1,8 @@
-const daytripCollectModel = require("../model/daytripCollect");
+const travelSampleModel = require("../model/travelSample");
 
-const daytripCollectController = {
+const travelSampleController = {
   getAll: async (req, res) => {
-    const result = await daytripCollectModel.getAll();
+    const result = await travelSampleModel.getAll();
     let json;
     if (result && Array.isArray(result.rows)) {
       json = {
@@ -20,7 +20,7 @@ const daytripCollectController = {
       res.status(400).json(json)
     }
   },
-  createCollect: async (req, res) => {
+  createSample: async (req, res) => {
     const { name } = req.body
     let json;
     if (!name) {
@@ -31,7 +31,7 @@ const daytripCollectController = {
       };
       return res.status(403).json(json)
     }
-    const result = await daytripCollectModel.createCollect(name)
+    const result = await travelSampleModel.createSample(name)
     if (result && Array.isArray(result.rows)) {
       json = {
         success: true,
@@ -48,19 +48,19 @@ const daytripCollectController = {
       res.status(400).json(json)
     }
   },
-  getCollect: async (req, res) => {
-    const daytripId = req.params.daytripId
-    if (!daytripId && daytripId !== 0) {
+  getSample: async (req, res) => {
+    const sampleId = req.params.sampleId
+    if (!sampleId && sampleId !== 0) {
       json = {
         success: false,
         collectList: [],
-        errMsg: "缺少 daytripId"
+        errMsg: "缺少 sampleId"
       };
 
       return res.status(403).json(json)
     }
     try {
-      const result = await daytripCollectModel.getCollect(daytripId)
+      const result = await travelSampleModel.getSample(sampleId)
       if (result && Array.isArray(result.rows)) {
         json = {
           success: true,
@@ -88,4 +88,4 @@ const daytripCollectController = {
   }
 };
 
-module.exports = daytripCollectController;
+module.exports = travelSampleController;

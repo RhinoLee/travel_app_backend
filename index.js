@@ -14,8 +14,8 @@ const port = 5001;
 const timeZoneController = require("./controller/timezone")
 const travelController = require("./controller/travel")
 const locationController = require("./controller/location")
-const daytripCollectController = require("./controller/daytripCollect")
-const singleTripCollectController = require("./controller/singleTripCollect")
+const travelSampleController = require("./controller/travelSample")
+const locationTripCollectController = require("./controller/locationTripCollect")
 
 const corsOptions = {
   origin: 'http://localhost:3000',
@@ -28,10 +28,10 @@ app.use(urlencodedParser);
 app.get("/timezone", timeZoneController.getTimeZoneList)
 
 // travel CRUD
-app.get("/travel", travelController.getAllTravel)
-app.get("/travel/:travelId", travelController.getTravel)
-app.post("/travel", travelController.createTravel)
-app.delete("/travel", travelController.deleteTravel)
+app.get("/travel_plan", travelController.getAllTravel)
+app.get("/travel_plan/:planId", travelController.getTravel)
+app.post("/travel_plan", travelController.createTravel)
+app.delete("/travel_plan", travelController.deleteTravel)
 
 // location CRUD
 app.get("/location", locationController.getAllLocation)
@@ -39,12 +39,12 @@ app.post("/location", locationController.createLocation)
 app.delete("/location", locationController.deleteLocation)
 
 // daytrip_collect CRUD
-app.get("/daytrip_collect", daytripCollectController.getAll)
-app.get("/daytrip_collect/:daytripId", daytripCollectController.getCollect)
-app.post("/daytrip_collect", daytripCollectController.createCollect)
+app.get("/travel_sample", travelSampleController.getAll)
+app.get("/travel_sample/:sampleId", travelSampleController.getSample)
+app.post("/travel_sample", travelSampleController.createSample)
 
 // single_trip_collect CRUD
-app.post("/single_trip_collect", singleTripCollectController.createCollect)
+app.post("/location_trip_collect", locationTripCollectController.createCollect)
 
 app.listen(port, () => {
   db.connect();
