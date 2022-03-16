@@ -26,7 +26,7 @@ const travelSampleController = {
     if (!name) {
       json = {
         success: false,
-        dayTrip: {},
+        travelSample: {},
         errMsg: "行程名稱未填"
       };
       return res.status(403).json(json)
@@ -35,14 +35,14 @@ const travelSampleController = {
     if (result && Array.isArray(result.rows)) {
       json = {
         success: true,
-        dayTrip: result.rows[0],
+        travelSample: result.rows[0],
       };
 
       res.status(200).json(json)
     } else {
       json = {
         success: false,
-        dayTrip: {},
+        travelSample: {},
       };
 
       res.status(400).json(json)

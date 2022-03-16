@@ -12,7 +12,7 @@ const port = 5001;
 
 // controller
 const timeZoneController = require("./controller/timezone")
-const travelController = require("./controller/travel")
+const travelPlanController = require("./controller/travelPlan")
 const locationController = require("./controller/location")
 const travelSampleController = require("./controller/travelSample")
 const locationTripCollectController = require("./controller/locationTripCollect")
@@ -28,10 +28,10 @@ app.use(urlencodedParser);
 app.get("/timezone", timeZoneController.getTimeZoneList)
 
 // travel CRUD
-app.get("/travel_plan", travelController.getAllTravel)
-app.get("/travel_plan/:planId", travelController.getTravel)
-app.post("/travel_plan", travelController.createTravel)
-app.delete("/travel_plan", travelController.deleteTravel)
+app.get("/travel_plan", travelPlanController.getAllPlan)
+app.get("/travel_plan/:planId", travelPlanController.getPlan)
+app.post("/travel_plan", travelPlanController.createPlan)
+app.delete("/travel_plan", travelPlanController.deletePlan)
 
 // location CRUD
 app.get("/location", locationController.getAllLocation)

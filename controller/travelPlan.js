@@ -1,36 +1,36 @@
-const travelModel = require("../model/travel");
+const travelPlanModel = require("../model/travelPlan");
 
-const travelController = {
-  getAllTravel: async (req, res) => {
-    const result = await travelModel.getAllTravel();
+const travelPlanController = {
+  getAllPlan: async (req, res) => {
+    const result = await travelPlanModel.getAllPlan();
     if (result && Array.isArray(result.rows)) {
       const json = {
         success: true,
-        travelList: result.rows,
+        travelPlanList: result.rows,
       };
       res.status(200).json(json);
     } else {
       const json = {
         success: false,
-        travelList: [],
+        travelPlanList: [],
         error: "error",
       };
       res.status(404).json(json);
     }
   },
-  getTravel: async (req, res) => {
-    const travelId = req.params.travelId
+  getPlan: async (req, res) => {
+    const planId = req.params.planId
     let json;
-    if (!travelId && travelId !== 0) {
+    if (!planId && planId !== 0) {
       json = {
         success: false,
         travel: null,
-        error: "未帶 travelId",
+        error: "未帶 planId",
       }
 
       return res.status(403).json(json);
     }
-    const result = await travelModel.getTravel(travelId)
+    const result = await travelPlanModel.getPlan(planId)
     if (result && result.rows[0]) {
       const json = {
         success: true,
@@ -48,7 +48,7 @@ const travelController = {
       res.status(400).json(json)
     }
   },
-  createTravel: async (req, res) => {
+  createPlan: async (req, res) => {
     const { name, intro, description, start_date, end_date, timezone } = req.body;
     let json;
     if (!name) {
@@ -68,7 +68,7 @@ const travelController = {
       return res.status(403).json(json);
     }
 
-    const result = await travelModel.createTravel({
+    const result = await travelPlanModel.createPlan({
       name,
       intro,
       description,
@@ -92,12 +92,12 @@ const travelController = {
       res.status(400).json(json)
     }
   },
-  deleteTravel: async (req, res) => {
-    const { travelId } = req.body
+  deletePlan: async (req, res) => {
+    const { planId } = req.body
     let json;
-    if (!travelId && travelId !== 0) return
+    if (!planId && planId !== 0) return
 
-    const result = await travelModel.deleteTravel(travelId)
+    const result = await travelPlanModel.deletePlan(planId)
     if (result) {
       json = {
         success: true,
@@ -112,4 +112,4 @@ const travelController = {
   }
 };
 
-module.exports = travelController;
+module.exports = travelPlanController;

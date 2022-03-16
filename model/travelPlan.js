@@ -1,7 +1,7 @@
 const db = require("../db");
 
-const travelModel = {
-  getAllTravel: async () => {
+const travelPlanModel = {
+  getAllPlan: async () => {
     const query = {
       text: "SELECT * FROM travel_plan ORDER BY start_date",
     };
@@ -13,7 +13,7 @@ const travelModel = {
       return err;
     }
   },
-  getTravel: async (travelId) => {
+  getPlan: async (travelId) => {
     const query = {
       text: "SELECT * FROM travel_plan WHERE id = $1",
       values: [travelId]
@@ -26,7 +26,7 @@ const travelModel = {
       return err
     }
   },
-  createTravel: async ({ name, intro, description, start_date, end_date, timezone }) => {
+  createPlan: async ({ name, intro, description, start_date, end_date, timezone }) => {
     const query = {
       text: `INSERT INTO 
             travel_plan(name, intro, description, start_date, end_date, timezone) 
@@ -41,7 +41,7 @@ const travelModel = {
       return err;
     }
   },
-  deleteTravel: async (travelId) => {
+  deletePlan: async (travelId) => {
     const query = {
       text: "DELETE FROM travel_plan WHERE id = $1 RETURNING id",
       values: [travelId],
@@ -56,4 +56,4 @@ const travelModel = {
   },
 };
 
-module.exports = travelModel;
+module.exports = travelPlanModel;
